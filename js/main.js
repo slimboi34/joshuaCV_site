@@ -95,6 +95,20 @@
     eg.appendChild(c);
   });
 
+  /* ------------------------------------------------------------ stack (2D) */
+  // Always rendered. CSS hides it when the WebGL sphere takes over, so
+  // low-bandwidth clients get a readable tag grid with zero extra download.
+  var flat = $("#stack-flat");
+  if (flat && D.stack) {
+    D.stack.forEach(function (s) {
+      var pill = el("span", "stack-pill" + (s.x ? " stack-pill--hot" : ""));
+      pill.textContent = s.t;
+      if (s.w >= 1.15) pill.classList.add("stack-pill--lg");
+      else if (s.w < 0.95) pill.classList.add("stack-pill--sm");
+      flat.appendChild(pill);
+    });
+  }
+
   /* --------------------------------------------------------------- projects */
   var grid = $("#proj-grid");
 
@@ -248,13 +262,50 @@
   /* ----------------------------------------------------- honors / languages */
   var hon = $("#honors");
   D.honors.forEach(function (h) {
-    var c = el("article", "honor");
+    var c = el("article", "honor" + (h.featured ? " honor--featured" : ""));
+
+    if (h.rank) {
+      var badge = el("div", "honor__rank");
+      var rv = el("span", "honor__rank-v"); rv.textContent = h.rank;
+      var rl = el("span", "honor__rank-l"); rl.textContent = h.rankLabel || "";
+      badge.appendChild(rv); badge.appendChild(rl);
+      c.appendChild(badge);
+    }
+
+    var body = el("div", "honor__body");
     var t = el("h3", "honor__t"); t.textContent = h.title;
     var m = el("p", "honor__m");  m.textContent = h.meta;
     var b = el("p", "honor__b");  b.textContent = h.body;
-    c.appendChild(t); c.appendChild(m); c.appendChild(b);
+    body.appendChild(t); body.appendChild(m); body.appendChild(b);
+
+    if (h.links && h.links.length) {
+      var foot = el("div", "honor__foot");
+      h.links.forEach(function (l) {
+        var a = el("a", "proj__link");
+        a.href = l.href; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.appendChild(icon("link"));
+        a.appendChild(document.createTextNode(l.label));
+        foot.appendChild(a);
+      });
+      body.appendChild(foot);
+    }
+    c.appendChild(body);
     hon.appendChild(c);
   });
+
+  if (D.credentials && D.credentials.length) {
+    var creds = el("div", "creds");
+    var ch = el("p", "creds__head"); ch.textContent = "Also";
+    creds.appendChild(ch);
+    D.credentials.forEach(function (cr) {
+      var row = el("div", "cred");
+      var t2 = el("span", "cred__t"); t2.textContent = cr.title;
+      var m2 = el("span", "cred__m"); m2.textContent = cr.meta;
+      row.appendChild(t2); row.appendChild(m2);
+      creds.appendChild(row);
+    });
+    hon.appendChild(creds);
+  }
 
   var langs = $("#languages");
   D.languages.forEach(function (l) {

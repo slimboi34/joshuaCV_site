@@ -5,28 +5,12 @@
  * ==========================================================================*/
 import * as THREE from "three";
 
-const canvas = document.getElementById("stack-canvas");
-if (canvas) boot();
+export function initConstellation() {
+  const canvas = document.getElementById("stack-canvas");
+  if (!canvas) return;
 
-function boot() {
-  const TAGS = [
-    { t: "Python",       w: 1.35 }, { t: "C++",           w: 1.35 },
-    { t: "TypeScript",   w: 1.15 }, { t: "JavaScript",    w: 1.15 },
-    { t: "pybind11",     w: 1.0  }, { t: "CMake",         w: 0.95 },
-    { t: "NumPy",        w: 0.95 }, { t: "pandas",        w: 0.95 },
-    { t: "Monte Carlo",  w: 1.1  }, { t: "Chain Ladder",  w: 0.95 },
-    { t: "Bühlmann",     w: 0.9  }, { t: "IBNR",          w: 0.9  },
-    { t: "LLM Agents",   x: 1, w: 1.3 }, { t: "MCP",      w: 1.1  },
-    { t: "RAG",          w: 1.0  }, { t: "NLP",           w: 0.95 },
-    { t: "GitHub Actions", w: 1.0 }, { t: "Jenkins",      w: 1.0  },
-    { t: "CI/CD",        w: 1.05 }, { t: "PyPI",          w: 1.0  },
-    { t: "Railway",      w: 0.95 }, { t: "Docker",        w: 0.9  },
-    { t: "Stripe",       w: 0.95 }, { t: "Solidity",      w: 1.0  },
-    { t: "FHE",          w: 0.9  }, { t: "SQL",           w: 0.95 },
-    { t: "JSON",         w: 0.9  }, { t: "Jupyter",       w: 0.9  },
-    { t: "scikit-build", w: 0.9  }, { t: "Three.js",      w: 0.95 },
-    { t: "Data Viz",     w: 1.0  }, { t: "Excel Automation", w: 0.85 }
-  ];
+  const TAGS = (window.CV && window.CV.stack) || [];
+  if (!TAGS.length) return;
 
   let renderer;
   try {

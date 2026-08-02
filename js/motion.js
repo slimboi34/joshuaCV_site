@@ -1,39 +1,42 @@
 /* ============================================================================
- * motion.js — GSAP scroll choreography, 3D card tilt, magnetic buttons and
- * stat counters.
+ * motion.js — GSAP choreography. Loaded by js/boot.js only on tiers that
+ * earned it, and only after GSAP itself is on the page.
  *
- * Everything here is enhancement. Three independent guarantees keep content
- * from ever being stranded invisible:
+ * Three guarantees keep content from ever being stranded invisible:
  *   1. CSS hides elements only under `html.js-motion`, which the head script
  *      sets and withdraws if this file never reports ready.
- *   2. The whole setup runs inside try/catch — a throw mid-file rolls back
- *      every inline style GSAP applied and re-shows the page.
- *   3. The splash screen clears itself via CSS animation, not JS.
+ *   2. Everything runs inside try/catch — a throw rolls back every inline
+ *      style GSAP applied and re-shows the page.
+ *   3. The splash clears itself via CSS animation, not JS.
  * ==========================================================================*/
 (function () {
   "use strict";
 
   var root = document.documentElement;
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tier = root.dataset.tier || "full";
+  var rich = tier === "full";                    // desktop-only garnish
 
-  /* --------------------------------------------------------------- helpers */
   function killSplash(cb) {
     var pre = document.getElementById("preloader");
     if (!pre) return cb && cb();
-    if (!window.gsap) { pre.remove(); return cb && cb(); }
+    // No GSAP, or nobody watching: remove it outright. Animating it away in a
+    // hidden tab would never complete — rAF is frozen — and it would still be
+    // sitting there when the user switched back.
+    if (!window.gsap || document.hidden) { pre.remove(); return cb && cb(); }
     window.gsap.to(pre, {
-      opacity: 0, duration: 0.55, ease: "power2.inOut",
+      opacity: 0, duration: 0.5, ease: "power2.inOut",
       onComplete: function () { pre.remove(); cb && cb(); }
     });
   }
 
-  // Last line of defence: undo everything and hand the user a static page.
   function recover(err) {
     if (window.console) console.warn("[motion] disabled after error:", err);
     try { window.gsap && window.gsap.globalTimeline.clear(); } catch (e) {}
     document.querySelectorAll("[style]").forEach(function (el) {
       el.style.removeProperty("opacity");
       el.style.removeProperty("transform");
+      el.style.removeProperty("clip-path");
       el.style.removeProperty("visibility");
     });
     root.classList.remove("js-motion");
@@ -49,58 +52,69 @@
     return;
   }
 
+  /* --------------------------------------------------------------------------
+   * Background tabs freeze rAF, which freezes GSAP. If we built the timelines
+   * now, every `.from()` would pin its element at opacity 0 with no ticker to
+   * animate it — the user would switch to the tab and find a blank page.
+   * So: show the page immediately, and wire the animation layer up only once
+   * someone is actually looking at it.
+   * ------------------------------------------------------------------------*/
+  if (document.hidden) {
+    root.classList.remove("js-motion");
+    window.__motionReady = true;
+    killSplash();
+    document.addEventListener("visibilitychange", function onVis() {
+      if (document.hidden) return;
+      document.removeEventListener("visibilitychange", onVis);
+      build();                       // tweens animate from hidden → visible
+    });
+    return;
+  }
+
+  build();
+
+  function build() {
   var gsap = window.gsap;
   var ST = window.ScrollTrigger;
   var started = false;
 
-  function startIntro(tl) {
-    return function () {
-      if (started) return;
-      started = true;
-      killSplash(function () { tl.play(); });
-    };
-  }
-
   try {
-    gsap.registerPlugin(ST, window.SplitText);
+    gsap.registerPlugin(ST);
+    if (window.ScrollToPlugin) gsap.registerPlugin(window.ScrollToPlugin);
 
-    /* ------------------------------------------------------------- intro */
+    /* ================================================================ intro */
+    // Gradient headings wipe in; splitting them per-character would break
+    // background-clip:text, so the clip-path does the work instead.
+    document.querySelectorAll(".hero__name").forEach(function (el) {
+      el.classList.add("wipe");
+    });
+
     var introTl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
-
-    var nameEl = document.getElementById("hero-name");
-    var chars = null;
-    if (nameEl && window.SplitText) {
-      try { chars = new window.SplitText(nameEl, { type: "chars" }).chars; }
-      catch (e) { chars = null; }
-    }
-
-    if (chars && chars.length) {
-      gsap.set(chars, { yPercent: 118, opacity: 0, rotateX: -78 });
-      introTl.to(chars, {
-        yPercent: 0, opacity: 1, rotateX: 0,
-        duration: 1.05, stagger: 0.035, ease: "back.out(1.6)"
-      }, 0);
-    } else if (nameEl) {
-      introTl.from(nameEl, { y: 40, opacity: 0, duration: 0.9 }, 0);
-    }
-
     introTl
-      .from(".hero__eyebrow", { y: 18, opacity: 0, duration: 0.7 }, 0.15)
-      .from(".hero__role",    { y: 22, opacity: 0, duration: 0.7 }, 0.5)
-      .from(".hero__loc",     { y: 18, opacity: 0, duration: 0.6 }, 0.62)
+      .from(".hero__eyebrow", { y: 18, opacity: 0, duration: 0.7 }, 0)
+      .to(".hero__name", {
+        clipPath: "inset(0 0% 0 0)", duration: 1.25, ease: "expo.out"
+      }, 0.1)
+      .from(".hero__name", { y: 26, duration: 1.0, ease: "expo.out" }, 0.1)
+      .from(".hero__role",  { y: 22, opacity: 0, duration: 0.7 }, 0.5)
+      .from(".hero__loc",   { y: 18, opacity: 0, duration: 0.6 }, 0.62)
       .from(".hero__summary p", { y: 22, opacity: 0, duration: 0.7, stagger: 0.12 }, 0.7)
       .from(".hero__tagline", { x: -18, opacity: 0, duration: 0.6 }, 0.9)
       .from(".hero__links .btn", {
-        y: 24, opacity: 0, scale: 0.92, duration: 0.6, stagger: 0.07, ease: "back.out(2)"
+        y: 26, opacity: 0, scale: 0.9, duration: 0.6, stagger: 0.07, ease: "back.out(2)"
       }, 1.0)
-      .from(".formations .formation", { y: 14, opacity: 0, duration: 0.5, stagger: 0.06 }, 1.15);
+      .from(".formations-wrap", { y: 16, opacity: 0, duration: 0.6 }, 1.2);
 
-    var go = startIntro(introTl);
-    if (document.readyState === "complete") go();
-    else addEventListener("load", go);
-    setTimeout(go, 1800);                        // failsafe
+    function startIntro() {
+      if (started) return;
+      started = true;
+      killSplash(function () { introTl.play(); });
+    }
+    if (document.readyState === "complete") startIntro();
+    else addEventListener("load", startIntro);
+    setTimeout(startIntro, 1800);
 
-    /* --------------------------------------------------- section reveals */
+    /* ====================================================== section reveals */
     function reveal(selector, vars) {
       gsap.utils.toArray(selector).forEach(function (el) {
         el.dataset.animated = "1";
@@ -110,10 +124,23 @@
       });
     }
 
-    reveal(".section__head", {
-      from: { y: 42, opacity: 0 },
-      to:   { y: 0, opacity: 1, duration: 0.85, ease: "power3.out" }
+    // headings: wipe the gradient in, then let it drift
+    gsap.utils.toArray(".section__head").forEach(function (head) {
+      head.dataset.animated = "1";
+      var title = head.querySelector(".section__title");
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: head, start: "top 86%", once: true }
+      });
+      tl.fromTo(head, { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
+      if (title) {
+        title.classList.add("wipe");
+        tl.to(title, { clipPath: "inset(0 0% 0 0)", duration: 1.0, ease: "expo.out" }, 0.12);
+      }
+      var kicker = head.querySelector(".section__kicker");
+      if (kicker) tl.from(kicker, { x: -14, opacity: 0, duration: 0.5 }, 0);
     });
+
     reveal(".stats", {
       from: { y: 40, opacity: 0, scale: 0.97 },
       to:   { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
@@ -127,7 +154,7 @@
       to:   { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
     });
     reveal(".stack", {
-      from: { opacity: 0, scale: 0.9 },
+      from: { opacity: 0, scale: 0.93 },
       to:   { opacity: 1, scale: 1, duration: 1, ease: "power3.out" }
     });
     reveal(".contact .wrap", {
@@ -137,7 +164,7 @@
 
     gsap.utils.toArray(".exp-card").forEach(function (card, i) {
       gsap.fromTo(card,
-        { y: 54, opacity: 0, rotateY: 22, transformPerspective: 900 },
+        { y: 54, opacity: 0, rotateY: rich ? 22 : 0, transformPerspective: 900 },
         { y: 0, opacity: 1, rotateY: 0, duration: 0.85, ease: "power3.out",
           delay: (i % 3) * 0.09,
           scrollTrigger: { trigger: card, start: "top 88%", once: true } });
@@ -145,7 +172,7 @@
 
     gsap.utils.toArray(".proj").forEach(function (card, i) {
       gsap.fromTo(card,
-        { y: 60, opacity: 0, scale: 0.94, rotateX: 10, transformPerspective: 1000 },
+        { y: 56, opacity: 0, scale: 0.95, rotateX: rich ? 10 : 0, transformPerspective: 1000 },
         { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 0.8, ease: "power3.out",
           delay: (i % 3) * 0.07,
           scrollTrigger: { trigger: card, start: "top 90%", once: true } });
@@ -153,7 +180,7 @@
 
     gsap.utils.toArray(".job").forEach(function (job) {
       var trig = { trigger: job, start: "top 88%", once: true };
-      gsap.fromTo(job, { x: -34, opacity: 0 },
+      gsap.fromTo(job, { x: -30, opacity: 0 },
         { x: 0, opacity: 1, duration: 0.75, ease: "power3.out", scrollTrigger: trig });
       var dot = job.querySelector(".job__dot");
       if (dot) {
@@ -162,14 +189,21 @@
       }
     });
 
-    // any remaining .reveal nothing above claimed
+    gsap.utils.toArray(".stack-pill").forEach(function (pill, i) {
+      gsap.fromTo(pill,
+        { y: 14, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)",
+          delay: Math.min(i * 0.018, 0.7),
+          scrollTrigger: { trigger: ".stack", start: "top 84%", once: true } });
+    });
+
     gsap.utils.toArray(".reveal").forEach(function (el) {
       if (el.dataset.animated) return;
       gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 92%", once: true } });
     });
 
-    /* ----------------------------------------------------- timeline draw */
+    /* ========================================================= timeline draw */
     var timeline = document.querySelector(".timeline");
     if (timeline) {
       var prog = document.createElement("span");
@@ -181,13 +215,13 @@
       });
     }
 
-    /* ------------------------------------------------------ hero parallax */
+    /* ========================================================= hero parallax */
     gsap.to(".hero__grid", {
-      y: 90, opacity: 0.15, ease: "none",
+      y: 80, opacity: 0.12, ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 }
     });
 
-    /* ------------------------------------------------------ stat counters */
+    /* ========================================================= stat counters */
     gsap.utils.toArray(".stat__v").forEach(function (el) {
       var raw = el.textContent.trim();
       var m = raw.match(/^(\d[\d,]*)(.*)$/);
@@ -203,8 +237,46 @@
       });
     });
 
-    /* ------------------------------------------------ tilt + magnetic btns */
-    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    /* ====================================================== sliding nav pill */
+    var pill = document.querySelector(".nav__pill");
+    var links = gsap.utils.toArray(".nav__link");
+
+    function movePill(to) {
+      if (!pill || !to || getComputedStyle(pill).display === "none") return;
+      pill.style.width = to.offsetWidth + "px";
+      pill.style.transform = "translateX(" + to.offsetLeft + "px)";
+      pill.style.opacity = "1";
+    }
+    function activePill() {
+      movePill(document.querySelector(".nav__link.is-active"));
+    }
+    links.forEach(function (a) {
+      a.addEventListener("pointerenter", function () { movePill(a); });
+    });
+    var navBar = document.querySelector(".nav__links");
+    if (navBar) navBar.addEventListener("pointerleave", activePill);
+    addEventListener("scroll", activePill, { passive: true });
+    addEventListener("resize", activePill);
+    setTimeout(activePill, 100);
+
+    /* ======================================================= smooth anchors */
+    if (window.ScrollToPlugin) {
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute("href");
+        if (id.length < 2 || !document.querySelector(id)) return;
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          gsap.to(window, {
+            duration: 1.05, ease: "power3.inOut",
+            scrollTo: { y: id, offsetY: 70, autoKill: true }
+          });
+          history.replaceState(null, "", id);
+        });
+      });
+    }
+
+    /* ================================================ tilt + magnetic buttons */
+    if (rich && matchMedia("(hover: hover) and (pointer: fine)").matches) {
       document.querySelectorAll(".proj, .exp-card, .honor").forEach(function (card) {
         var raf = null;
         card.addEventListener("pointermove", function (e) {
@@ -243,20 +315,34 @@
       });
     }
 
-    /* ------------------------------------- re-stagger cards after filtering */
+    /* ============================================== filter re-stagger + flash */
     document.querySelectorAll(".filter").forEach(function (b) {
       b.addEventListener("click", function () {
         gsap.fromTo(".proj:not(.is-hidden)",
-          { opacity: 0, y: 22, scale: 0.96 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.035, ease: "power3.out",
+          { opacity: 0, y: 24, scale: 0.95, rotateX: rich ? 8 : 0 },
+          { opacity: 1, y: 0, scale: 1, rotateX: 0, duration: 0.5,
+            stagger: 0.035, ease: "power3.out",
             onComplete: function () { ST.refresh(); } });
+        gsap.fromTo(b, { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(3)" });
+      });
+    });
+
+    /* ===================================== recolour chrome with the formation */
+    // The particle field announces its palette; the accent follows it so the
+    // whole page shifts mood with the visualisation.
+    document.addEventListener("formationchange", function (e) {
+      if (!rich) return;
+      gsap.to(root, {
+        duration: 1.2, ease: "power2.inOut",
+        "--accent": e.detail.a,
+        "--mint": e.detail.b
       });
     });
 
     addEventListener("load", function () { ST.refresh(); });
-
-    window.__motionReady = true;                 // only once everything is wired
+    window.__motionReady = true;
   } catch (err) {
     recover(err);
+  }
   }
 })();

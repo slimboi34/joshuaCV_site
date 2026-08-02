@@ -31,7 +31,7 @@ window.CV = {
 
   /* ------------------------------------------------------------------ stats */
   stats: [
-    { value: "3+",   label: "years shipping production software" },
+    { value: "4+",   label: "years shipping production software" },
     { value: "105",  label: "repositories built" },
     { value: "1",    label: "package published to PyPI" },
     { value: "4th",  label: "in the world — World Rowing Junior Champs" }
@@ -112,6 +112,28 @@ window.CV = {
         "Zero-dependency component kits"
       ]
     }
+  ],
+
+  /* ------------------------------------------------------------------ stack */
+  // Rendered as the 3D sphere on desktop and as a tag grid everywhere else.
+  // `w` is relative weight (sprite size), `x` highlights the tag.
+  stack: [
+    { t: "Python", w: 1.35 },      { t: "C++", w: 1.35 },
+    { t: "TypeScript", w: 1.15 },  { t: "JavaScript", w: 1.15 },
+    { t: "pybind11", w: 1.0 },     { t: "CMake", w: 0.95 },
+    { t: "NumPy", w: 0.95 },       { t: "pandas", w: 0.95 },
+    { t: "Monte Carlo", w: 1.1 },  { t: "Chain Ladder", w: 0.95 },
+    { t: "Bühlmann", w: 0.9 },     { t: "IBNR", w: 0.9 },
+    { t: "LLM Agents", w: 1.3, x: 1 }, { t: "MCP", w: 1.1 },
+    { t: "RAG", w: 1.0 },          { t: "NLP", w: 0.95 },
+    { t: "GitHub Actions", w: 1.0 }, { t: "Jenkins", w: 1.0 },
+    { t: "CI/CD", w: 1.05 },       { t: "PyPI", w: 1.0 },
+    { t: "Railway", w: 0.95 },     { t: "Docker", w: 0.9 },
+    { t: "Stripe", w: 0.95 },      { t: "Solidity", w: 1.0 },
+    { t: "FHE", w: 0.9 },          { t: "SQL", w: 0.95 },
+    { t: "JSON", w: 0.9 },         { t: "Jupyter", w: 0.9 },
+    { t: "scikit-build", w: 0.9 }, { t: "Three.js", w: 0.95 },
+    { t: "Data Viz", w: 1.0 },     { t: "Excel Automation", w: 0.85 }
   ],
 
   /* --------------------------------------------------------------- projects */
@@ -425,43 +447,30 @@ window.CV = {
         "Worked across back-end services and front-end presentation layers."
       ],
       skills: ["Python", "CSS", "+14 more"]
-    },
-    {
-      role: "Strength & Conditioning Coach · Receptionist",
-      company: "Gold's Gym",
-      type: "Freelance / Full-time",
-      start: "Jan 2021",
-      end: "Oct 2022",
-      duration: "1 yr 10 mos",
-      location: "City of Johannesburg, Gauteng, South Africa · On-site",
-      muted: true,
-      points: [
-        "Coached strength and conditioning alongside sales and administration duties, " +
-        "before transitioning full-time into software engineering."
-      ],
-      skills: ["Sales", "Administration"]
     }
   ],
 
   /* ----------------------------------------------------------------- honors */
   honors: [
     {
-      title: "World Rowing Junior Championships — 4th in the World",
+      featured: true,
+      rank: "4th",
+      rankLabel: "in the world",
+      title: "World Rowing Junior Championships",
       meta: "Junior Men's Coxed Four · Representing South Africa",
-      body: "Placed fourth in the world in the junior men's coxed four, competing at the highest " +
-            "level of the sport and representing South Africa on a global stage."
-    },
-    {
-      title: "Published Open-Source Software to PyPI",
-      meta: "RiskPY · open-riskpy",
-      body: "Designed, built and published a C++/Python actuarial framework to the Python Package " +
-            "Index, with fully automated CI/CD release via GitHub Actions and Trusted Publishers."
-    },
-    {
-      title: "LinkedIn Skill Assessment — C++",
-      meta: "Passed",
-      body: "Verified C++ proficiency via LinkedIn's skill assessment."
+      body: "Fourth in the world in the junior men's coxed four, racing for South Africa at the " +
+            "highest level of the sport. Four years of 5am water sessions before school — the " +
+            "same appetite for grind that I bring to hard engineering problems.",
+      links: [
+        { label: "World Rowing", href: "https://worldrowing.com/events/" }
+      ]
     }
+  ],
+
+  /* ------------------------------------------------------------ credentials */
+  credentials: [
+    { title: "Published to PyPI",      meta: "RiskPY · open-riskpy" },
+    { title: "Open-source maintainer", meta: "MIT-licensed, CI/CD released" }
   ],
 
   /* -------------------------------------------------------------- languages */

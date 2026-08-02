@@ -98,13 +98,14 @@
 <header class="nav" id="nav">
   <div class="wrap nav__inner">
     <a class="nav__brand" href="#top">
-      <span class="nav__dot"></span>joshua-harty
+      <span class="nav__dot"></span><span class="nav__brand-t">joshua-harty</span>
     </a>
     <nav class="nav__links" aria-label="Sections">
+      <span class="nav__pill" aria-hidden="true"></span>
       <a class="nav__link" href="#expertise">Expertise</a>
       <a class="nav__link" href="#projects">Projects</a>
       <a class="nav__link" href="#experience">Experience</a>
-      <a class="nav__link" href="#awards">Awards</a>
+      <a class="nav__link" href="#awards">Beyond</a>
       <a class="nav__link" href="#contact">Contact</a>
     </nav>
     <div class="nav__actions">
@@ -137,12 +138,10 @@
         </div>
       </div>
 
-      <div class="formations" id="formations" role="group" aria-label="Change the 3D visualisation">
+      <div class="formations-wrap">
         <span class="formations__label">Particle field</span>
-        <button class="formation is-active" type="button" aria-pressed="true">Globe</button>
-        <button class="formation" type="button" aria-pressed="false">Monte Carlo</button>
-        <button class="formation" type="button" aria-pressed="false">Agent Mesh</button>
-        <button class="formation" type="button" aria-pressed="false">Pipeline</button>
+        <!-- buttons are generated from the formation table in js/hero3d.js -->
+        <div class="formations" id="formations" role="group" aria-label="Change the 3D visualisation"></div>
       </div>
     </div>
   </section>
@@ -165,7 +164,10 @@
           <p class="subhead">The stack, in orbit</p>
           <p class="stack__hint">Drag to spin it</p>
         </div>
+        <!-- WebGL sphere on desktop; the tag grid below is what phones and
+             low-bandwidth clients get instead — no three.js download. -->
         <canvas id="stack-canvas" aria-label="Rotating 3D cloud of technologies"></canvas>
+        <div class="stack__flat" id="stack-flat"></div>
       </div>
     </div>
   </section>
@@ -198,8 +200,8 @@
   <section class="section section--alt" id="awards">
     <div class="wrap">
       <div class="section__head">
-        <p class="section__kicker">Beyond the code</p>
-        <h2 class="section__title">Awards &amp; Languages</h2>
+        <p class="section__kicker">Away from the keyboard</p>
+        <h2 class="section__title">Beyond the Code</h2>
       </div>
       <div class="two-col">
         <div>
@@ -229,23 +231,16 @@
   <span id="footer-right"></span>
 </footer>
 
-<!-- content + rendering (classic, ordered) -->
+<!-- content + rendering — the only JS in the critical path (~14 KB) -->
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 
-<!-- animation layer -->
-<script src="vendor/gsap.min.js"></script>
-<script src="vendor/ScrollTrigger.min.js"></script>
-<script src="vendor/SplitText.min.js"></script>
-<script src="js/viz.js"></script>
-<script src="js/motion.js"></script>
-
-<!-- WebGL scenes -->
+<!-- Everything heavy is gated behind js/boot.js, which measures the device and
+     the connection first. Nothing below is fetched until it decides. -->
 <script type="importmap">
 { "imports": { "three": "./vendor/three.module.min.js" } }
 </script>
-<script type="module" src="js/hero3d.js"></script>
-<script type="module" src="js/constellation.js"></script>
+<script type="module" src="js/boot.js"></script>
 
 </body>
 </html>
