@@ -1,0 +1,18 @@
+{
+  "name": "joshua-harty-cv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal CV / portfolio site for Joshua Harty — WebGL hero, GSAP choreography, zero build step.",
+  "scripts": {
+    "start": "serve . --listen ${PORT:-3000} --no-clipboard",
+    "dev": "serve . --listen 4173 --no-clipboard"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "three": "^0.185.1",
+    "gsap": "^3.15.0"
+  },
+  "engines": { "node": ">=18" }
+}

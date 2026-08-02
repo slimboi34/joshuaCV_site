@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joshua Harty — Software Engineer &amp; Agentic Systems Engineer</title>
+
+<meta name="description" content="Joshua Harty — Software Engineer at Liberty Specialty Markets, London. C++ / Python systems, agentic AI pipelines, and open-source actuarial tooling (RiskPY on PyPI).">
+<meta name="author" content="Joshua Harty">
+<meta name="theme-color" content="#08090b">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Joshua Harty — Software Engineer &amp; Agentic Systems Engineer">
+<meta property="og:description" content="C++ / Python systems, agentic AI pipelines, and open-source actuarial tooling. London, UK.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2308090b'/%3E%3Ctext x='50' y='50' font-family='ui-monospace,Menlo,monospace' font-size='44' font-weight='700' fill='%23ffa63d' text-anchor='middle' dominant-baseline='central'%3EJH%3C/text%3E%3C/svg%3E">
+
+<!-- Theme + motion flags set before first paint, so there's no flash and no
+     chance of content being left hidden if the animation layer never boots. -->
+<script>
+(function () {
+  var d = document.documentElement;
+  try {
+    var t = localStorage.getItem("jh-theme");
+    if (t) d.setAttribute("data-theme", t);
+    else if (matchMedia("(prefers-color-scheme: light)").matches) d.setAttribute("data-theme", "light");
+  } catch (e) {}
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    d.classList.add("js-motion");
+    setTimeout(function () {
+      if (!window.__motionReady) d.classList.remove("js-motion");   // failsafe
+    }, 2500);
+
+    // Only show the splash if the page is actually being looked at. In a
+    // background tab rAF is frozen, so an animated splash would still be
+    // sitting there when the user switches back.
+    if (document.visibilityState === "visible") d.classList.add("has-splash");
+  }
+})();
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ========================================================== preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader__mono">JH</div>
+  <div class="preloader__bar"><span></span></div>
+</div>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-glow" aria-hidden="true"></div>
+<canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
+<!-- ============================================================== icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-github" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 .5C5.73.5.99 5.24.99 11.5c0 4.86 3.15 8.98 7.52 10.43.55.1.75-.24.75-.53v-1.9c-3.06.66-3.71-1.3-3.71-1.3-.5-1.28-1.23-1.62-1.23-1.62-1-.68.08-.67.08-.67 1.1.08 1.69 1.14 1.69 1.14.98 1.69 2.58 1.2 3.21.92.1-.71.39-1.2.7-1.48-2.44-.28-5.01-1.22-5.01-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.91 0 0 .92-.3 3.02 1.13a10.4 10.4 0 0 1 5.5 0c2.1-1.43 3.02-1.13 3.02-1.13.6 1.51.22 2.63.11 2.91.7.77 1.13 1.75 1.13 2.95 0 4.23-2.58 5.16-5.03 5.43.4.34.75 1.02.75 2.06v3.05c0 .29.2.64.76.53a10.53 10.53 0 0 0 7.51-10.43C23.01 5.24 18.27.5 12 .5Z"/>
+    </symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+    </symbol>
+    <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m7.5 4.27 9 5.15"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+    </symbol>
+    <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================================================================ nav -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="#top">
+      <span class="nav__dot"></span>joshua-harty
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a class="nav__link" href="#expertise">Expertise</a>
+      <a class="nav__link" href="#projects">Projects</a>
+      <a class="nav__link" href="#experience">Experience</a>
+      <a class="nav__link" href="#awards">Awards</a>
+      <a class="nav__link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="icon-btn" id="print-btn" title="Print / save as PDF" aria-label="Print or save as PDF">
+        <svg><use href="#i-print"></use></svg>
+      </button>
+      <button class="icon-btn theme-toggle" id="theme-btn" title="Toggle theme" aria-label="Toggle colour theme">
+        <svg class="sun"><use href="#i-sun"></use></svg>
+        <svg class="moon"><use href="#i-moon"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- ============================================================= hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__grid">
+        <div>
+          <span class="hero__eyebrow"><span class="pulse"></span><span id="hero-status"></span></span>
+          <h1 class="hero__name" id="hero-name"></h1>
+          <p class="hero__role" id="hero-role"></p>
+          <p class="hero__loc"><svg><use href="#i-pin"></use></svg><span id="hero-loc"></span></p>
+          <div class="hero__summary" id="hero-summary"></div>
+          <p class="hero__tagline" id="hero-tagline"></p>
+          <div class="hero__links" id="hero-links"></div>
+        </div>
+        <div class="hero__portrait">
+          <div class="portrait" id="portrait"><span class="portrait__ring"></span></div>
+        </div>
+      </div>
+
+      <div class="formations" id="formations" role="group" aria-label="Change the 3D visualisation">
+        <span class="formations__label">Particle field</span>
+        <button class="formation is-active" type="button" aria-pressed="true">Globe</button>
+        <button class="formation" type="button" aria-pressed="false">Monte Carlo</button>
+        <button class="formation" type="button" aria-pressed="false">Agent Mesh</button>
+        <button class="formation" type="button" aria-pressed="false">Pipeline</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ stats -->
+  <div class="wrap"><div class="stats reveal" id="stats"></div></div>
+
+  <!-- ======================================================== expertise -->
+  <section class="section" id="expertise">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="section__kicker">What I do</p>
+        <h2 class="section__title">Expertise</h2>
+        <p class="section__sub">From C++ numerical kernels to autonomous agent pipelines — the spread of things I build with.</p>
+      </div>
+      <div class="exp-grid" id="expertise-grid"></div>
+
+      <div class="stack">
+        <div class="stack__head">
+          <p class="subhead">The stack, in orbit</p>
+          <p class="stack__hint">Drag to spin it</p>
+        </div>
+        <canvas id="stack-canvas" aria-label="Rotating 3D cloud of technologies"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= projects -->
+  <section class="section section--alt" id="projects">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="section__kicker">Selected work</p>
+        <h2 class="section__title">Projects</h2>
+        <p class="section__sub">A curated slice of <strong id="repo-count">105</strong> repositories. Open-source work links straight to GitHub and PyPI; private and client work is described without the link.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
+      <div class="proj-grid" id="proj-grid"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================= experience -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="section__kicker">Track record</p>
+        <h2 class="section__title">Experience</h2>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================== awards -->
+  <section class="section section--alt" id="awards">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="section__kicker">Beyond the code</p>
+        <h2 class="section__title">Awards &amp; Languages</h2>
+      </div>
+      <div class="two-col">
+        <div>
+          <p class="subhead">Honours &amp; Awards</p>
+          <div id="honors"></div>
+        </div>
+        <div>
+          <p class="subhead">Languages</p>
+          <div id="languages"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== contact -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 class="contact__title">Let's build something.</h2>
+      <p class="contact__sub">Open to interesting problems — high-performance systems, agentic tooling, and anything with hard numbers underneath it.</p>
+      <div class="contact__links" id="contact-links"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <span id="footer-left"></span>
+  <span id="footer-right"></span>
+</footer>
+
+<!-- content + rendering (classic, ordered) -->
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+
+<!-- animation layer -->
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="js/viz.js"></script>
+<script src="js/motion.js"></script>
+
+<!-- WebGL scenes -->
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+<script type="module" src="js/hero3d.js"></script>
+<script type="module" src="js/constellation.js"></script>
+
+</body>
+</html>
