@@ -71,19 +71,6 @@
     contactLinks.appendChild(linkButton(l, l.icon === "mail"));
   });
 
-  /* --------------------------------------------------------------- portrait */
-  var portrait = $("#portrait");
-  var mono = el("span", "portrait__mono");
-  mono.textContent = p.initials;
-  portrait.appendChild(mono);
-
-  if (p.photo) {
-    var img = new Image();
-    img.alt = p.name;
-    img.onload = function () { portrait.replaceChild(img, mono); };
-    img.src = p.photo;                       // silently keeps the monogram if missing
-  }
-
   /* ------------------------------------------------------------------ stats */
   var stats = $("#stats");
   D.stats.forEach(function (s) {

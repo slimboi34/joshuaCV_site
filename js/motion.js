@@ -93,11 +93,7 @@
       .from(".hero__links .btn", {
         y: 24, opacity: 0, scale: 0.92, duration: 0.6, stagger: 0.07, ease: "back.out(2)"
       }, 1.0)
-      .from(".formations .formation", { y: 14, opacity: 0, duration: 0.5, stagger: 0.06 }, 1.15)
-      .from(".portrait", {
-        scale: 0.75, opacity: 0, rotateY: -35, duration: 1.1, ease: "power3.out"
-      }, 0.3)
-      .from(".portrait__ring", { scale: 1.35, opacity: 0, duration: 0.9 }, 0.8);
+      .from(".formations .formation", { y: 14, opacity: 0, duration: 0.5, stagger: 0.06 }, 1.15);
 
     var go = startIntro(introTl);
     if (document.readyState === "complete") go();

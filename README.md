@@ -14,7 +14,6 @@ js/constellation.js   3D rotating tech sphere (module)
 js/viz.js             live Monte Carlo aggregate-loss simulation
 js/motion.js          GSAP scroll choreography, tilt, counters
 vendor/               three.js + gsap builds (committed on purpose)
-assets/               drop portrait.jpg here for a profile photo
 ```
 
 ## Run locally
@@ -70,9 +69,6 @@ Everything is in `js/data.js`. No HTML edits required.
   links: [{ label: "GitHub", href: "https://..." }]
 }
 ```
-
-**Profile photo:** save a square image to `assets/portrait.jpg`. If it's absent
-the site falls back to a "JH" monogram — nothing breaks.
 
 ## Graceful degradation
 

@@ -21,9 +21,6 @@ window.CV = {
       "Outside of that I build and publish my own tools — most recently RiskPY, an open-source " +
       "actuarial pricing engine with a native C++ core, live on PyPI."
     ],
-    // Drop a photo at assets/portrait.jpg and it is picked up automatically.
-    // If the file is missing, the site falls back to an initials monogram.
-    photo: "assets/portrait.jpg",
     links: [
       { label: "GitHub",   href: "https://github.com/slimboi34",                    icon: "github"   },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/joshua-h-b5aa3a24b",  icon: "linkedin" },
