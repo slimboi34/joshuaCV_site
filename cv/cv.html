@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Joshua Harty — CV</title>
+<style>
+  @page { size: A4; margin: 10mm 12mm; }
+
+  :root {
+    --ink:    #16181d;
+    --dim:    #4a5260;
+    --faint:  #767e8c;
+    --rule:   #d8dae0;
+    --accent: #1b3a5c;
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    font-family: "Carlito", "Calibri", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 8.6pt;
+    line-height: 1.25;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ------------------------------------------------------------- header */
+  .name {
+    font-size: 18.5pt; font-weight: 700; letter-spacing: .01em;
+    color: var(--accent); text-align: center; line-height: 1.1;
+  }
+  .title {
+    text-align: center; font-size: 9.2pt; color: var(--dim);
+    margin-top: 2pt; font-weight: 600;
+  }
+  .contact {
+    text-align: center; font-size: 8pt; color: var(--faint);
+    margin-top: 3pt;
+  }
+  .contact span { white-space: nowrap; }
+  .site { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+  .sep { padding: 0 5pt; color: #b9bec7; }
+
+  .summary {
+    margin-top: 6pt; text-align: justify; color: var(--dim);
+    font-size: 8.5pt; line-height: 1.3;
+  }
+
+  /* ------------------------------------------------------------ sections */
+  h2 {
+    font-size: 8pt; font-weight: 700; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 6.5pt 0 3pt; padding-bottom: 2pt;
+    border-bottom: .8pt solid var(--rule);
+  }
+
+  .entry { margin-bottom: 3.6pt; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 10pt;
+  }
+  .role { font-weight: 700; font-size: 9pt; }
+  .org  { font-weight: 600; color: var(--accent); }
+  .when {
+    font-size: 7.8pt; color: var(--faint); white-space: nowrap; flex: none;
+  }
+  .where {
+    font-size: 7.8pt; color: var(--faint); font-style: italic; margin-top: .3pt;
+  }
+
+  ul { margin: 2.5pt 0 0; padding-left: 10pt; }
+  li { margin-bottom: 1.5pt; }
+  li::marker { color: var(--faint); }
+  b { font-weight: 700; }
+
+  .skills { margin-top: 2pt; }
+  .skill-row { display: flex; gap: 6pt; margin-bottom: 2pt; }
+  .skill-k {
+    font-weight: 700; color: var(--accent); flex: none; width: 68pt;
+  }
+  .skill-v { color: var(--dim); }
+
+  .honour { display: flex; gap: 7pt; align-items: baseline; }
+  .rank {
+    font-weight: 700; color: var(--accent); flex: none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="name">JOSHUA HARTY</div>
+  <div class="title">Software Engineer — High-Performance Python / C++ &nbsp;·&nbsp; Risk &amp; Pricing &nbsp;·&nbsp; Agentic Systems</div>
+  <div class="contact">
+    <span>London, UK</span><span class="sep">·</span>
+    <span>joshh456@icloud.com</span><span class="sep">·</span>
+    <span><a class="site" href="https://cv-site-production-5591.up.railway.app">My Site</a></span>
+    <br>
+    <span><a href="https://www.linkedin.com/in/joshua-h-b5aa3a24b">linkedin.com/in/joshua-h-b5aa3a24b</a></span><span class="sep">·</span>
+    <span><a href="https://github.com/slimboi34">github.com/slimboi34</a></span>
+  </div>
+
+  <p class="summary">
+    Software engineer building high-performance pricing and risk systems in the London specialty
+    insurance market. Author of <b>RiskPY</b>, an open-source C++/Python actuarial pricing framework
+    on PyPI. Ships production LLM-backed features and serverless AWS services, and runs an AI-first
+    development workflow — coding agents and LLM automation across projects and the delivery cycle.
+    Pursuing an MS in Computer Science (CU Boulder) alongside full-time work.
+  </p>
+
+  <h2>Experience</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">Software Engineer</span> <span class="sep">·</span> <span class="org">Liberty Specialty Markets</span></div>
+      <div class="when">Mar 2025 – Present</div>
+    </div>
+    <div class="where">London, UK (Hybrid) — specialty insurance: risk &amp; pricing</div>
+    <ul>
+      <li>Built an <b>admin panel over the risk-pricing models</b> giving stakeholders per-policy insight, trend analysis across the underwriting mix, and system-wide data exportability — including a <b>natural-language query interface</b> so non-technical stakeholders can self-serve insights.</li>
+      <li>Designed an <b>agentic workflow</b> automating non-critical dev changes end-to-end through Jira, built on the team's existing agentic API and running in production.</li>
+      <li>Built a harness connecting internal agents to <b>Slack and Microsoft Teams</b> — production tooling in active internal use, which I maintain and am extending with a developer bot.</li>
+      <li>Run an <b>AI-first dev flow</b>: coding agents and LLM automation embedded throughout day-to-day delivery, from code generation to routine engineering work.</li>
+      <li>Design and ship <b>serverless services on AWS</b> — Lambda, Step Functions, API Gateway — deployed with CDK and GitHub Actions CI/CD, with CloudWatch observability.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">System Integration Engineer</span> <span class="sep">·</span> <span class="org">Light &amp; Wonder</span></div>
+      <div class="when">Sep 2023 – Mar 2025</div>
+    </div>
+    <div class="where">Chiswick, London (Hybrid) — gaming systems</div>
+    <ul>
+      <li>Built and maintained <b>Python integration and test automation</b> for regulated gaming platforms, with Jenkins CI pipelines across multi-system environments.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">Earlier roles</span> <span class="sep">·</span> <span class="org">Paragon Impact</span> (Jersey) · <span class="org">The Good People Data Company</span> (Johannesburg)</div>
+      <div class="when">Oct 2022 – Sep 2023</div>
+    </div>
+    <ul>
+      <li>Junior engineer roles: Python back-end development — JSON APIs and data validation for an ESG reporting product; client data products and front-end contributions.</li>
+    </ul>
+  </div>
+
+  <h2>Open Source &amp; Projects</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">RiskPY</span> <span class="sep">·</span> creator &amp; maintainer — <code>pip install open-riskpy</code></div>
+      <div class="when">PyPI · GitHub · MIT</div>
+    </div>
+    <ul>
+      <li>Open-source <b>actuarial pricing framework</b> bridging native C++ performance with a Python API via pybind11 and scikit-build-core.</li>
+      <li>Monte Carlo aggregate-loss simulation (Poisson × Lognormal) in native C++; chain-ladder reserving with IBNR; Bühlmann credibility; excess-layer pricing, ILFs, burning-cost analysis; rate-filing tools.</li>
+      <li>Automated release: GitHub Actions CI/CD publishing to PyPI via <b>Trusted Publishers</b>; ships a desktop GUI and batch CSV-to-Excel processing.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">Selected Personal Projects</span> <span class="sep">·</span> <a href="https://github.com/slimboi34">github.com/slimboi34</a></div>
+      <div class="when">105 repositories</div>
+    </div>
+    <ul>
+      <li><b>Agentic systems</b> — <i>agent-ventures</i>: eight deployable micro-SaaS products on one shared zero-dependency kit, Stripe-wired and Railway-deployed. Plus an agentic Telegram bot driving a personal LLM workflow end-to-end, and a self-resuming autonomous task runner.</li>
+      <li><b>Quant &amp; markets</b> — Polymarket prediction-market paper-trading and calibration analytics (Python); an order-flow tool surfacing what the book does beneath top-of-book; a Monte Carlo risk visualiser.</li>
+      <li><b>Systems &amp; graphics</b> — C++ 360° tower-defence game; Rust/Bevy Apollo 11 landing simulation; this CV site — a WebGL particle field of 120k GPU particles with a live in-browser Monte Carlo loss simulation.</li>
+      <li><b>Data &amp; ML</b> — NLP disaster-tweets classifier (Kaggle); interactive UK homicide geospatial map; Solidity on-chain wagering contracts and Zama FHE experiments.</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">MS, Computer Science</span> <span class="sep">·</span> <span class="org">University of Colorado Boulder</span></div>
+      <div class="when">In progress · exp. 2027</div>
+    </div>
+    <ul>
+      <li>Coursework: advanced algorithms &amp; data structures, dynamic programming, approximation &amp; linear programming, high-performance &amp; parallel computing, deep learning (vision &amp; NLP), data mining, big-data architecture, FPGA &amp; real-time embedded systems.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div><span class="role">BSc, Information Technology</span> <span class="sep">·</span> <span class="org">Richfield</span></div>
+      <div class="when">2022 – 2024</div>
+    </div>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill-row"><div class="skill-k">Languages</div><div class="skill-v">Python, C++, TypeScript/JavaScript, SQL, Rust (hobbyist)</div></div>
+    <div class="skill-row"><div class="skill-k">Cloud &amp; Infra</div><div class="skill-v">AWS (Lambda, Step Functions, API Gateway, CDK/SAM, CloudWatch), GitHub Actions, Jenkins, Docker, Railway</div></div>
+    <div class="skill-row"><div class="skill-k">Domains</div><div class="skill-v">Actuarial pricing &amp; risk, Monte Carlo simulation, LLM/agent engineering, MCP tooling, AI-augmented development, pybind11 native extensions, Django/React</div></div>
+    <div class="skill-row"><div class="skill-k">Spoken</div><div class="skill-v">English (native), Afrikaans (native)</div></div>
+  </div>
+
+  <h2>Honours</h2>
+  <div class="honour">
+    <div class="rank">4th in the world</div>
+    <div class="skill-v">World Rowing Junior Championships — junior men's coxed four, representing South Africa</div>
+  </div>
+
+</body>
+</html>

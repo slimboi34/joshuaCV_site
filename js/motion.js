@@ -145,6 +145,10 @@
       from: { y: 40, opacity: 0, scale: 0.97 },
       to:   { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
     });
+    reveal(".edu-item", {
+      from: { y: 26, opacity: 0 },
+      to:   { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }
+    });
     reveal(".honor", {
       from: { x: -28, opacity: 0 },
       to:   { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }

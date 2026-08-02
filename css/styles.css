@@ -513,6 +513,26 @@ html:not([data-theme="light"]) .theme-toggle .sun { display: none; }
 .job--muted .job__role, .job--muted .job__co { color: var(--text-faint); font-weight: 560; }
 .job--muted .job__pts li { font-size: .855rem; }
 
+/* ------------------------------------------------------------------ education */
+.edu { margin-top: 34px; }
+.edu-item {
+  display: flex; gap: 15px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 18px 20px;
+}
+.edu-item + .edu-item { margin-top: 10px; }
+.edu-item--current { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.edu-item__i { width: 20px; height: 20px; flex: none; color: var(--accent); margin-top: 2px; }
+.edu-item__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px;
+}
+.edu-item__d { font-size: 1rem; font-weight: 660; letter-spacing: -.02em; }
+.edu-item__s { color: var(--accent); font-weight: 560; font-size: .93rem; }
+.edu-item__w {
+  font-family: var(--mono); font-size: .74rem; color: var(--text-faint); margin-left: auto;
+}
+.edu-item__n { font-size: .855rem; color: var(--text-dim); margin-top: 8px; }
+
 /* ---------------------------------------------------------- honors / langs */
 .two-col {
   display: grid; gap: 40px;
@@ -618,6 +638,7 @@ html.js-motion .exp-card,
 html.js-motion .proj,
 html.js-motion .job,
 html.js-motion .honor,
+html.js-motion .edu-item,
 html.js-motion .lang,
 html.js-motion .stack,
 html.js-motion .contact .wrap { opacity: 0; }
@@ -832,6 +853,11 @@ html.js-motion .wipe { clip-path: inset(0 100% 0 0); }
   .job__co { font-size: .93rem; }
   .job__meta { font-size: .715rem; }
   .job__pts li { font-size: .87rem; }
+
+  .edu { margin-top: 26px; }
+  .edu-item { padding: 15px 15px; gap: 11px; }
+  .edu-item__w { margin-left: 0; width: 100%; }
+  .edu-item__n { font-size: .82rem; }
 
   .honor--featured { flex-direction: column; gap: 16px; padding: 20px 18px; }
   .honor__rank { min-width: 0; align-self: flex-start; padding: 12px 18px; }

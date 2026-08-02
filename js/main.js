@@ -259,6 +259,28 @@
     tl.appendChild(art);
   });
 
+  /* -------------------------------------------------------------- education */
+  var edu = $("#education");
+  if (edu && D.education) {
+    D.education.forEach(function (e) {
+      var c = el("article", "edu-item" + (e.current ? " edu-item--current" : ""));
+      var head = el("div", "edu-item__head");
+      var d = el("h3", "edu-item__d"); d.textContent = e.degree;
+      var sc = el("span", "edu-item__s"); sc.textContent = e.school;
+      var w = el("span", "edu-item__w"); w.textContent = e.when;
+      head.appendChild(d); head.appendChild(sc); head.appendChild(w);
+      c.appendChild(icon("cap", "edu-item__i"));
+      var body = el("div");
+      body.appendChild(head);
+      if (e.note) {
+        var n = el("p", "edu-item__n"); n.textContent = e.note;
+        body.appendChild(n);
+      }
+      c.appendChild(body);
+      edu.appendChild(c);
+    });
+  }
+
   /* ----------------------------------------------------- honors / languages */
   var hon = $("#honors");
   D.honors.forEach(function (h) {

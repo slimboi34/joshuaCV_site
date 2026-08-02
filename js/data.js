@@ -9,23 +9,25 @@ window.CV = {
   profile: {
     name: "Joshua Harty",
     initials: "JH",
-    role: "Software Engineer & Agentic Systems Engineer",
+    role: "High-Performance Python / C++ · Risk & Pricing · Agentic Systems",
     location: "London, England, United Kingdom",
     tagline: "Welcome to the factory floor.",
     summary: [
-      "Software engineer with a bias for things that actually ship. I work across the stack " +
-      "and down to the metal — Python and TypeScript at the surface, C++ where the numbers " +
-      "get heavy, and autonomous agent pipelines to do the parts nobody should be doing by hand.",
+      "Software engineer building high-performance pricing and risk systems in the London " +
+      "specialty insurance market. Python and TypeScript at the surface, C++ where the numbers " +
+      "get heavy, and agentic pipelines doing the parts nobody should be doing by hand.",
 
-      "Currently building at Liberty Specialty Markets in the London specialty insurance market. " +
-      "Outside of that I build and publish my own tools — most recently RiskPY, an open-source " +
-      "actuarial pricing engine with a native C++ core, live on PyPI."
+      "At Liberty Specialty Markets I ship production LLM-backed features and serverless AWS " +
+      "services, and run an AI-first development workflow. Outside of that I publish my own " +
+      "tools — most recently RiskPY, an open-source actuarial pricing engine with a native C++ " +
+      "core, live on PyPI. Currently reading for an MS in Computer Science at CU Boulder."
     ],
     links: [
       { label: "GitHub",   href: "https://github.com/slimboi34",                    icon: "github"   },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/joshua-h-b5aa3a24b",  icon: "linkedin" },
       { label: "PyPI",     href: "https://pypi.org/project/open-riskpy/",           icon: "package"  },
-      { label: "Email",    href: "mailto:jharty1999@gmail.com",                     icon: "mail"     }
+      { label: "Email",    href: "mailto:joshh456@icloud.com",                     icon: "mail"     },
+      { label: "Download CV", href: "cv/Joshua_Harty_CV.pdf",                       icon: "doc"      }
     ]
   },
 
@@ -92,12 +94,12 @@ window.CV = {
       title: "Platform & DevOps",
       blurb: "CI/CD that publishes without a human in the loop.",
       items: [
-        "GitHub Actions CI/CD",
-        "Jenkins pipelines",
+        "AWS Lambda, Step Functions, API Gateway",
+        "Infrastructure as code with CDK / SAM",
+        "CloudWatch observability",
+        "GitHub Actions CI/CD & Jenkins pipelines",
         "PyPI Trusted Publishers (OIDC)",
-        "Railway deployments",
-        "System integration & release engineering",
-        "Automated test & build matrices"
+        "Docker & Railway deployments"
       ]
     },
     {
@@ -128,12 +130,15 @@ window.CV = {
     { t: "RAG", w: 1.0 },          { t: "NLP", w: 0.95 },
     { t: "GitHub Actions", w: 1.0 }, { t: "Jenkins", w: 1.0 },
     { t: "CI/CD", w: 1.05 },       { t: "PyPI", w: 1.0 },
+    { t: "AWS", w: 1.25 },         { t: "Lambda", w: 1.0 },
+    { t: "Step Functions", w: 0.9 }, { t: "CDK", w: 0.9 },
     { t: "Railway", w: 0.95 },     { t: "Docker", w: 0.9 },
     { t: "Stripe", w: 0.95 },      { t: "Solidity", w: 1.0 },
     { t: "FHE", w: 0.9 },          { t: "SQL", w: 0.95 },
     { t: "JSON", w: 0.9 },         { t: "Jupyter", w: 0.9 },
     { t: "scikit-build", w: 0.9 }, { t: "Three.js", w: 0.95 },
-    { t: "Data Viz", w: 1.0 },     { t: "Excel Automation", w: 0.85 }
+    { t: "Data Viz", w: 1.0 },     { t: "Excel Automation", w: 0.85 },
+    { t: "Rust", w: 0.9 },         { t: "Django/React", w: 0.9 }
   ],
 
   /* --------------------------------------------------------------- projects */
@@ -257,6 +262,34 @@ window.CV = {
       tech: ["Solidity"],
       blurb: "On-chain wagering platform built in Solidity — smart contracts handling escrow and " +
              "settlement without a trusted middleman.",
+      links: []
+    },
+    {
+      name: "Polymarket Trading Tool",
+      repo: "PolyMarket_trading_tool_tbd-",
+      private: true,
+      tags: ["Quant"],
+      tech: ["Python", "MIT"],
+      blurb: "Prediction-market paper-trading and calibration analytics — scoring how well " +
+             "implied probabilities actually track outcomes.",
+      links: []
+    },
+    {
+      name: "Apollo 11 Landing Sim",
+      private: true,
+      tags: ["Systems"],
+      tech: ["Rust", "Bevy"],
+      blurb: "A lunar-descent simulation built in Rust with the Bevy engine — real orbital " +
+             "mechanics driving the landing, not a scripted animation.",
+      links: []
+    },
+    {
+      name: "Agentic Telegram Bot",
+      private: true,
+      tags: ["Agentic"],
+      tech: ["Python", "LLM"],
+      blurb: "A personal LLM agent workflow driven end-to-end through Telegram — tasks in by " +
+             "message, work done autonomously, results back in the thread.",
       links: []
     },
     {
@@ -399,11 +432,18 @@ window.CV = {
       location: "Greater London, England, United Kingdom · Hybrid",
       current: true,
       points: [
-        "Engineering software for the London specialty insurance market.",
-        "Python-based data analysis and validation across underwriting and pricing workflows.",
-        "Working within a 20+ skill remit spanning data engineering, tooling and delivery."
+        "Built an admin panel over the risk-pricing models giving stakeholders per-policy insight, " +
+        "trend analysis across the underwriting mix and system-wide data exportability — including " +
+        "a natural-language query interface so non-technical stakeholders can self-serve.",
+        "Designed an agentic workflow automating non-critical dev changes end-to-end through Jira, " +
+        "built on the team's existing agentic API and running in production.",
+        "Built a harness connecting internal agents to Slack and Microsoft Teams — production " +
+        "tooling in active internal use, which I maintain and am extending with a developer bot.",
+        "Run an AI-first dev flow: coding agents and LLM automation embedded throughout delivery.",
+        "Design and ship serverless services on AWS — Lambda, Step Functions, API Gateway — " +
+        "deployed with CDK and GitHub Actions CI/CD, with CloudWatch observability."
       ],
-      skills: ["Python", "Data Analysis & Validation", "+18 more"]
+      skills: ["Python", "AWS", "LLM/Agents", "CDK", "Jira", "+18 more"]
     },
     {
       role: "System Integration Engineer",
@@ -414,9 +454,8 @@ window.CV = {
       duration: "1 yr 7 mos",
       location: "Chiswick, London · Hybrid",
       points: [
-        "System integration across gaming platforms at a global gaming technology company.",
-        "Built and maintained Jenkins CI/CD pipelines and Python automation for release workflows.",
-        "Breadth across 30+ tracked technical skills — integration, testing and release engineering."
+        "Built and maintained Python integration and test automation for regulated gaming " +
+        "platforms, with Jenkins CI pipelines across multi-system environments."
       ],
       skills: ["Python", "Jenkins", "+29 more"]
     },
@@ -447,6 +486,25 @@ window.CV = {
         "Worked across back-end services and front-end presentation layers."
       ],
       skills: ["Python", "CSS", "+14 more"]
+    }
+  ],
+
+  /* -------------------------------------------------------------- education */
+  education: [
+    {
+      degree: "MS, Computer Science",
+      school: "University of Colorado Boulder",
+      when: "In progress · expected 2027",
+      current: true,
+      note: "Coursework: advanced algorithms & data structures, dynamic programming, " +
+            "approximation & linear programming, high-performance & parallel computing, " +
+            "deep learning (vision & NLP), data mining, big-data architecture, " +
+            "FPGA & real-time embedded systems."
+    },
+    {
+      degree: "BSc, Information Technology",
+      school: "Richfield",
+      when: "2022 – 2024"
     }
   ],
 
